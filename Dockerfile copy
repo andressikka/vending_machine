@@ -1,0 +1,17 @@
+FROM php:7.4.20-apache
+
+
+RUN pecl install xdebug \
+    && docker-php-ext-enable xdebug
+
+RUN docker-php-ext-install mysqli
+#     && docker-php-ext-install zlib \
+#     && docker-php-ext-install gd
+
+# RUN a2enmod autoindex
+# COPY apache2.conf /var/www/html
+COPY .htaccess /var/www/html
+# COPY apache2.conf /etc/apache2
+RUN chmod -R 777 /var/www/html
+# RUN apt update && \
+#      apt install net-tools
